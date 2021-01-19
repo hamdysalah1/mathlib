@@ -789,7 +789,7 @@ variables (α β) [unique α]
 @[simps] def fun_unique : (α → β) ≃ β :=
 { to_fun := λ f, f (default α),
   inv_fun := λ b a, b,
-  left_inv := λ f, funext $ λ a, congr_arg f $ subsingleton.elim _ _,
+  left_inv := λ f, funext $ λ a, congr_arg f $ @subsingleton.elim _ _ _ _,
   right_inv := λ b, rfl }
 
 end fun_unique
