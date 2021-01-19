@@ -36,7 +36,7 @@ begin
     convert h fin_zero_elim,
     show (eval₂_hom (ring_hom.id _) pempty.elim) (rename fin_zero_equiv' p) = _,
     rw [eval₂_hom_rename],
-    exact eval₂_hom_congr rfl (subsingleton.elim _ _) rfl },
+    exact eval₂_hom_congr rfl (@subsingleton.elim _ unique.subsingleton _ _) rfl },
   { introsI R _ _ p h,
     let e := fin_succ_equiv R n,
     apply e.injective,
