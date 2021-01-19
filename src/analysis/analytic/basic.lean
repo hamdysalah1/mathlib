@@ -297,7 +297,7 @@ by simpa only [sub_eq_add_neg] using hf.add hg.neg
 lemma has_fpower_series_on_ball.coeff_zero (hf : has_fpower_series_on_ball f pf x r)
   (v : fin 0 → E) : pf 0 v = f x :=
 begin
-  have v_eq : v = (λ i, 0) := subsingleton.elim _ _,
+  have v_eq : v = (λ i, 0) := @subsingleton.elim _ unique.subsingleton _ _,
   have zero_mem : (0 : E) ∈ emetric.ball (0 : E) r, by simp [hf.r_pos],
   have : ∀ i ≠ 0, pf i (λ j, 0) = 0,
   { assume i hi,
