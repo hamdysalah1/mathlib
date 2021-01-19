@@ -89,7 +89,7 @@ end
 def preserves_terminal_of_is_iso
   (f : G.obj (⊤_ C) ⟶ ⊤_ D) [i : is_iso f] : preserves_limit (functor.empty C) G :=
 begin
-  rw subsingleton.elim f (terminal_comparison G) at i,
+  rw @subsingleton.elim _ unique.subsingleton f (terminal_comparison G) at i,
   exactI preserves_terminal.of_iso_comparison G,
 end
 
