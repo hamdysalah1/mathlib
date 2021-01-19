@@ -495,6 +495,8 @@ lemma times_cont_diff_within_at.differentiable_within_at {n : with_top ℕ}
   differentiable_within_at 𝕜 f s x :=
 (h.differentiable_within_at' hn).mono  (subset_insert x s)
 
+section
+local attribute [instance] unique.subsingleton
 /-- A function is `C^(n + 1)` on a domain iff locally, it has a derivative which is `C^n`. -/
 theorem times_cont_diff_within_at_succ_iff_has_fderiv_within_at {n : ℕ} :
   times_cont_diff_within_at 𝕜 ((n + 1) : ℕ) f s x
@@ -540,6 +542,8 @@ begin
           change p' x k (init (@snoc k (λ i : fin k.succ, E) v y))
             (@snoc k (λ i : fin k.succ, E) v y (last k)) = p' x k v y,
           rw [snoc_last, init_snoc] } } } }
+end
+
 end
 
 /-! ### Smooth functions within a set -/
@@ -2421,6 +2425,7 @@ end algebra_inverse
 
 section map_inverse
 open continuous_linear_map
+local attribute [instance] unique.subsingleton
 
 /-- At a continuous linear equivalence `e : E ≃L[𝕜] F` between Banach spaces, the operation of
 inversion is `C^n`, for all `n`. -/
