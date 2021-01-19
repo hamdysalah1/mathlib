@@ -108,7 +108,7 @@ namespace algebra
 
 namespace finite_type
 
-lemma self : finite_type R R := ⟨{1}, subsingleton.elim _ _⟩
+lemma self : finite_type R R := ⟨{1}, @subsingleton.elim _ unique.subsingleton _ _⟩
 
 section
 open_locale classical
