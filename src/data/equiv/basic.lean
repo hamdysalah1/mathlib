@@ -1865,8 +1865,8 @@ instance {α} [decidable_eq α] : decidable_eq (plift α) := equiv.plift.decidab
 def equiv_of_unique_of_unique [unique α] [unique β] : α ≃ β :=
 { to_fun := λ _, default β,
   inv_fun := λ _, default α,
-  left_inv := λ _, subsingleton.elim _ _,
-  right_inv := λ _, subsingleton.elim _ _ }
+  left_inv := λ _, @subsingleton.elim _ unique.subsingleton _ _,
+  right_inv := λ _, @subsingleton.elim _ unique.subsingleton _ _ }
 
 /-- If `α` is a singleton, then it is equivalent to any `punit`. -/
 def equiv_punit_of_unique [unique α] : α ≃ punit.{v} :=
