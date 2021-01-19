@@ -1084,7 +1084,7 @@ variable {𝕜}
 @[simp] lemma continuous_multilinear_map.apply_zero_curry0
   (f : continuous_multilinear_map 𝕜 (λ (i : fin 0), G) E₂) {x : fin 0 → G} :
   continuous_multilinear_map.curry0 𝕜 G (f x) = f :=
-by { ext m, simp [(subsingleton.elim _ _ : x = m)] }
+by { ext m, simp [(@subsingleton.elim _ unique.subsingleton _ _ : x = m)] }
 
 lemma continuous_multilinear_map.uncurry0_curry0
   (f : continuous_multilinear_map 𝕜 (λ (i : fin 0), G) E₂) :
@@ -1108,7 +1108,7 @@ variables {𝕜 G}
   (f : continuous_multilinear_map 𝕜 (λ (i : fin 0), G) E₂) {x : fin 0 → G} :
   ∥f x∥ = ∥f∥ :=
 begin
-  have : x = 0 := subsingleton.elim _ _, subst this,
+  have : x = 0 := @subsingleton.elim _ unique.subsingleton _ _, subst this,
   refine le_antisymm (by simpa using f.le_op_norm 0) _,
   have : ∥continuous_multilinear_map.curry0 𝕜 G (f.uncurry0)∥ ≤ ∥f.uncurry0∥ :=
     continuous_multilinear_map.op_norm_le_bound _ (norm_nonneg _) (λm,
