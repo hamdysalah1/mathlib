@@ -214,7 +214,7 @@ protected lemma linear_map.linear_independent_iff (f : M →ₗ[R] M') (hf_inj :
 
 @[nontriviality]
 lemma linear_independent_of_subsingleton [subsingleton R] : linear_independent R v :=
-linear_independent_iff.2 (λ l hl, subsingleton.elim _ _)
+linear_independent_iff.2 (λ l hl, @subsingleton.elim _ unique.subsingleton _ _)
 
 lemma linear_independent.injective [nontrivial R] (hv : linear_independent R v) :
   injective v :=
