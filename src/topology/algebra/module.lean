@@ -265,11 +265,16 @@ when `0` is the zero function, while it does for the zero continuous linear map,
 and this is the most important property we care about. -/
 @[norm_cast] lemma coe_zero' : ((0 : M →L[R] M₂) : M → M₂) = 0 := rfl
 
+section
+local attribute [instance] unique.subsingleton
+
 instance unique_of_left [subsingleton M] : unique (M →L[R] M₂) :=
 coe_injective.unique
 
 instance unique_of_right [subsingleton M₂] : unique (M →L[R] M₂) :=
 coe_injective.unique
+
+end
 
 section
 
