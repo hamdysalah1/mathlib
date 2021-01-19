@@ -155,7 +155,7 @@ by simp [nth_zero]
 of one element `x : α` is `x` itself. -/
 @[simp] lemma nth_cons_nil {ix : fin 1}
   (x : α) : nth (x ::ᵥ nil) ix = x :=
-by convert nth_cons_zero x nil
+by convert nth_cons_zero x nil; exact fin.eq_zero ix
 
 @[simp] theorem nth_cons_succ
   (a : α) (v : vector α n) (i : fin n) : nth (a ::ᵥ v) i.succ = nth v i :=
@@ -256,8 +256,7 @@ begin
   cases n,
   { exact fin_zero_elim i },
   induction n with n hn generalizing b,
-  { have i0 : i = 0 := by simp only [eq_iff_true_of_subsingleton],
-    simpa only [scanl_singleton, i0, nth_zero] },
+  { simpa only [scanl_singleton, fin.eq_zero i, nth_zero] },
   { rw [←cons_head_tail v, scanl_cons, nth_cons_succ],
     refine fin.cases _ _ i,
     { simp only [nth_zero, scanl_head, fin.cast_succ_zero, cons_head] },

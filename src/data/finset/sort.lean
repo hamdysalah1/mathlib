@@ -145,7 +145,8 @@ by simp [order_emb_of_fin_apply, max'_eq_sorted_last, h]
 /-- `order_emb_of_fin {a} h` sends any argument to `a`. -/
 @[simp] lemma order_emb_of_fin_singleton (a : α) (i : fin 1) :
   order_emb_of_fin {a} (card_singleton a) i = a :=
-by rw [subsingleton.elim i ⟨0, zero_lt_one⟩, order_emb_of_fin_zero _ zero_lt_one, min'_singleton]
+by rw [@subsingleton.elim _ (unique.subsingleton) i ⟨0, zero_lt_one⟩,
+       order_emb_of_fin_zero _ zero_lt_one, min'_singleton]
 
 /-- Any increasing map `f` from `fin k` to a finset of cardinality `k` has to coincide with
 the increasing bijection `order_emb_of_fin s h`. -/

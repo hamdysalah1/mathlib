@@ -372,7 +372,7 @@ begin
 end
 
 @[instance, priority 10] def unique.fintype {α : Type*} [unique α] : fintype α :=
-fintype.of_subsingleton (default α)
+@fintype.of_subsingleton _ (default α) $ unique.subsingleton
 
 @[simp] lemma univ_unique {α : Type*} [unique α] [f : fintype α] : @finset.univ α _ = {default α} :=
 by rw [subsingleton.elim f (@unique.fintype α _)]; refl

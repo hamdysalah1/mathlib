@@ -171,7 +171,7 @@ unique.fintype
 
 @[simp] theorem card_singleton (a : α) :
   fintype.card ({a} : set α) = 1 :=
-fintype.card_of_subsingleton _
+@fintype.card_of_subsingleton _ _ unique.subsingleton
 
 @[simp] theorem finite_singleton (a : α) : finite ({a} : set α) :=
 ⟨set.fintype_singleton _⟩
