@@ -75,10 +75,10 @@ lemma degree_eq_bot : degree p = ⊥ ↔ p = 0 :=
 λ h, h.symm ▸ rfl⟩
 
 @[nontriviality] lemma degree_of_subsingleton [subsingleton R] : degree p = ⊥ :=
-by rw [subsingleton.elim p 0, degree_zero]
+by rw [@subsingleton.elim _ unique.subsingleton p 0, degree_zero]
 
 @[nontriviality] lemma nat_degree_of_subsingleton [subsingleton R] : nat_degree p = 0 :=
-by rw [subsingleton.elim p 0, nat_degree_zero]
+by rw [@subsingleton.elim _ unique.subsingleton p 0, nat_degree_zero]
 
 lemma degree_eq_nat_degree (hp : p ≠ 0) : degree p = (nat_degree p : with_bot ℕ) :=
 let ⟨n, hn⟩ :=

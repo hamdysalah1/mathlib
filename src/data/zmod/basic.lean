@@ -79,7 +79,7 @@ local attribute [instance] fin.add_comm_semigroup fin.comm_semigroup
 private lemma one_mul_aux (n : ℕ) (a : fin (n+1)) : (1 : fin (n+1)) * a = a :=
 begin
   cases n with n,
-  { exact subsingleton.elim _ _ },
+  { exact @subsingleton.elim _ unique.subsingleton _ _ },
   { have h₁ : (a : ℕ) % n.succ.succ = a := nat.mod_eq_of_lt a.2,
     apply fin.ext,
     simp only [coe_mul, coe_one, h₁, one_mul], }
