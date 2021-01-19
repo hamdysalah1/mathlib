@@ -166,7 +166,7 @@ variables [comm_semiring R] {p q : polynomial R}
 lemma multiplicity_finite_of_degree_pos_of_monic (hp : (0 : with_bot ℕ) < degree p)
   (hmp : monic p) (hq : q ≠ 0) : multiplicity.finite p q :=
 have zn0 : (0 : R) ≠ 1, from λ h, by haveI := subsingleton_of_zero_eq_one h;
-  exact hq (subsingleton.elim _ _),
+  exact hq (@subsingleton.elim _ unique.subsingleton _ _),
 ⟨nat_degree q, λ ⟨r, hr⟩,
   have hp0 : p ≠ 0, from λ hp0, by simp [hp0] at hp; contradiction,
   have hr0 : r ≠ 0, from λ hr0, by simp * at *,
@@ -394,7 +394,9 @@ theorem nat_degree_div_by_monic {R : Type u} [comm_ring R] (f : polynomial R) {g
 begin
   by_cases h01 : (0 : R) = 1,
   { haveI := subsingleton_of_zero_eq_one h01,
-    rw [subsingleton.elim (f /ₘ g) 0, subsingleton.elim f 0, subsingleton.elim g 0,
+    rw [@subsingleton.elim _ unique.subsingleton (f /ₘ g) 0,
+        @subsingleton.elim _ unique.subsingleton f 0,
+        @subsingleton.elim _ unique.subsingleton g 0,
         nat_degree_zero] },
   haveI : nontrivial R := ⟨⟨0, 1, h01⟩⟩,
   by_cases hfg : f /ₘ g = 0,
@@ -438,7 +440,7 @@ else
 lemma map_mod_div_by_monic [comm_ring S] (f : R →+* S) (hq : monic q) :
   (p /ₘ q).map f = p.map f /ₘ q.map f ∧ (p %ₘ q).map f = p.map f %ₘ q.map f :=
 if h01 : (0 : S) = 1 then by haveI := subsingleton_of_zero_eq_one h01;
-  exact ⟨subsingleton.elim _ _, subsingleton.elim _ _⟩
+  exact ⟨@subsingleton.elim _ unique.subsingleton _ _, @subsingleton.elim _ unique.subsingleton _ _⟩
 else
 have h01R : (0 : R) ≠ 1, from mt (congr_arg f)
   (by rwa [f.map_one, f.map_zero]),
@@ -498,7 +500,8 @@ by conv_rhs { rw [← mod_by_monic_add_div p monic_one] }; simp
 
 @[simp] lemma mod_by_monic_X_sub_C_eq_C_eval (p : polynomial R) (a : R) :
   p %ₘ (X - C a) = C (p.eval a) :=
-if h0 : (0 : R) = 1 then by letI := subsingleton_of_zero_eq_one h0; exact subsingleton.elim _ _
+if h0 : (0 : R) = 1 then by letI := subsingleton_of_zero_eq_one h0;
+  exact @subsingleton.elim _ unique.subsingleton _ _
 else
 by haveI : nontrivial R := nontrivial_of_ne 0 1 h0; exact
 have h : (p %ₘ (X - C a)).eval a = p.eval a :=
@@ -551,7 +554,7 @@ lemma multiplicity_X_sub_C_finite (a : R) (h0 : p ≠ 0) :
   multiplicity.finite (X - C a) p :=
 multiplicity_finite_of_degree_pos_of_monic
   (have (0 : R) ≠ 1, from (λ h, by haveI := subsingleton_of_zero_eq_one h;
-      exact h0 (subsingleton.elim _ _)),
+      exact h0 (@subsingleton.elim _ unique.subsingleton _ _)),
     by haveI : nontrivial R := ⟨⟨0, 1, this⟩⟩; rw degree_X_sub_C; exact dec_trivial)
     (monic_X_sub_C _) h0
 /-- The largest power of `X - C a` which divides `p`.
