@@ -1147,7 +1147,7 @@ begin
   let b : set S := {1},
   have : fintype b := unique.fintype,
   have b_lin_ind : linear_independent F (coe : b → S) := linear_independent_singleton one_ne_zero,
-  have b_card : fintype.card b = 1 := fintype.card_of_subsingleton _,
+  have b_card : fintype.card b = 1 := @fintype.card_of_subsingleton _ _ unique.subsingleton,
   obtain ⟨_, b_spans⟩ := set_is_basis_of_linear_independent_of_card_eq_findim
     b_lin_ind (by simp only [*, set.to_finset_card]),
   intros x hx,
