@@ -186,7 +186,7 @@ variable {n : ℕ}
 lemma duality (p q : Q n) : ε p (e q) = if p = q then 1 else 0 :=
 begin
   induction n with n IH,
-  { rw (show p = q, from subsingleton.elim p q),
+  { rw (show p = q, from @subsingleton.elim _ unique.subsingleton p q),
     dsimp [ε, e],
     simp },
   { dsimp [ε, e],
