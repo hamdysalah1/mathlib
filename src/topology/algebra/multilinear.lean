@@ -43,8 +43,8 @@ are modules over `R` with a topological structure. In applications, there will b
 conditions between the algebraic and the topological structures, but this is not needed for the
 definition. -/
 structure continuous_multilinear_map (R : Type u) {ι : Type v} (M₁ : ι → Type w₁) (M₂ : Type w₂)
-  [decidable_eq ι] [semiring R] [∀i, add_comm_monoid (M₁ i)] [add_comm_monoid M₂] [∀i, semimodule R (M₁ i)]
-  [semimodule R M₂] [∀i, topological_space (M₁ i)] [topological_space M₂]
+  [decidable_eq ι] [semiring R] [∀i, add_comm_monoid (M₁ i)] [add_comm_monoid M₂]
+  [∀i, semimodule R (M₁ i)] [semimodule R M₂] [∀i, topological_space (M₁ i)] [topological_space M₂]
   extends multilinear_map R M₁ M₂ :=
 (cont : continuous to_fun)
 
@@ -57,8 +57,8 @@ section semiring
 variables [semiring R]
 [Πi, add_comm_monoid (M i)] [Πi, add_comm_monoid (M₁ i)] [Πi, add_comm_monoid (M₁' i)]
   [add_comm_monoid M₂] [add_comm_monoid M₃] [add_comm_monoid M₄]
-  [Π i, semimodule R (M i)] [Π i, semimodule R (M₁ i)]  [Π i, semimodule R (M₁' i)] [semimodule R M₂]
-  [semimodule R M₃] [semimodule R M₄]
+  [Π i, semimodule R (M i)] [Π i, semimodule R (M₁ i)]  [Π i, semimodule R (M₁' i)]
+  [semimodule R M₂] [semimodule R M₃] [semimodule R M₄]
   [Π i, topological_space (M i)] [Π i, topological_space (M₁ i)] [Π i, topological_space (M₁' i)]
   [topological_space M₂] [topological_space M₃] [topological_space M₄]
 (f f' : continuous_multilinear_map R M₁ M₂)
@@ -182,8 +182,8 @@ open fintype finset
 
 variables {α : ι → Type*} [fintype ι] (g : Π i, α i → M₁ i) (A : Π i, finset (α i))
 
-/-- If `f` is continuous multilinear, then `f (Σ_{j₁ ∈ A₁} g₁ j₁, ..., Σ_{jₙ ∈ Aₙ} gₙ jₙ)` is the sum
-of `f (g₁ (r 1), ..., gₙ (r n))` where `r` ranges over all functions with `r 1 ∈ A₁`, ...,
+/-- If `f` is continuous multilinear, then `f (Σ_{j₁ ∈ A₁} g₁ j₁, ..., Σ_{jₙ ∈ Aₙ} gₙ jₙ)` is the
+sum of `f (g₁ (r 1), ..., gₙ (r n))` where `r` ranges over all functions with `r 1 ∈ A₁`, ..., 
 `r n ∈ Aₙ`. This follows from multilinearity by expanding successively with respect to each
 coordinate. -/
 lemma map_sum_finset  :
