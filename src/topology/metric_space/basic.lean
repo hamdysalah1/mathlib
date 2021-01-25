@@ -104,17 +104,16 @@ by rw dist_comm y; apply dist_triangle
 
 lemma dist_triangle4 (x y z w : α) :
   dist x w ≤ dist x y + dist y z + dist z w :=
-calc
-  dist x w ≤ dist x z + dist z w : dist_triangle x z w
-       ... ≤ (dist x y + dist y z) + dist z w : add_le_add_right (metric_space.dist_triangle x y z) _
+calc dist x w ≤ dist x z + dist z w : dist_triangle x z w
+          ... ≤ (dist x y + dist y z) + dist z w : add_le_add_right (dist_triangle x y z) _
 
 lemma dist_triangle4_left (x₁ y₁ x₂ y₂ : α) :
   dist x₂ y₂ ≤ dist x₁ y₁ + (dist x₁ x₂ + dist y₁ y₂) :=
-by rw [add_left_comm, dist_comm x₁, ← add_assoc]; apply dist_triangle4
+by { rw [add_left_comm, dist_comm x₁, ← add_assoc], apply dist_triangle4 }
 
 lemma dist_triangle4_right (x₁ y₁ x₂ y₂ : α) :
   dist x₁ y₁ ≤ dist x₁ x₂ + dist y₁ y₂ + dist x₂ y₂ :=
-by rw [add_right_comm, dist_comm y₁]; apply dist_triangle4
+by { rw [add_right_comm, dist_comm y₁], apply dist_triangle4 }
 
 /-- The triangle (polygon) inequality for sequences of points; `finset.Ico` version. -/
 lemma dist_le_Ico_sum_dist (f : ℕ → α) {m n} (h : m ≤ n) :
