@@ -672,9 +672,9 @@ variables (c : R) (h : M₂ →L[R] M₃) (f g : M →L[R] M₂) (x y z : M)
 
 variable [topological_module R M₂]
 
-@[simp] lemma smul_apply : (c • f) x = c • (f x) := rfl
-@[simp, norm_cast] lemma coe_apply : (((c • f) : M →L[R] M₂) : M →ₗ[R] M₂) = c • f := rfl
-@[norm_cast] lemma coe_apply' : (((c • f) : M →L[R] M₂) : M → M₂) = c • (f : M → M₂) := rfl
+lemma smul_apply : (c • f) x = c • (f x) := rfl
+@[simp, norm_cast] lemma coe_smul : (((c • f) : M →L[R] M₂) : M →ₗ[R] M₂) = c • f := rfl
+@[simp, norm_cast] lemma coe_smul' : (((c • f) : M →L[R] M₂) : M → M₂) = c • (f : M → M₂) := rfl
 
 @[simp] lemma comp_smul : h.comp (c • f) = c • (h.comp f) := by { ext, simp }
 
@@ -727,7 +727,7 @@ instance : has_coe_to_fun (M ≃L[R] M₂) := ⟨λ _, M → M₂, λ f, f⟩
 
 @[simp] theorem coe_def_rev (e : M ≃L[R] M₂) : e.to_continuous_linear_map = e := rfl
 
-@[simp] theorem coe_apply (e : M ≃L[R] M₂) (b : M) : (e : M →L[R] M₂) b = e b := rfl
+theorem coe_apply (e : M ≃L[R] M₂) (b : M) : (e : M →L[R] M₂) b = e b := rfl
 
 @[simp] lemma coe_to_linear_equiv (f : M ≃L[R] M₂) : ⇑f.to_linear_equiv = f := rfl
 
@@ -860,21 +860,13 @@ continuous_linear_map.ext e.apply_symm_apply
   (e.symm : M₂ →L[R] M).comp (e : M →L[R] M₂) = continuous_linear_map.id R M :=
 continuous_linear_map.ext e.symm_apply_apply
 
-lemma symm_comp_self (e : M ≃L[R] M₂) :
+@[simp] lemma symm_comp_self (e : M ≃L[R] M₂) :
   (e.symm : M₂ → M) ∘ (e : M → M₂) = id :=
 by{ ext x, exact symm_apply_apply e x }
 
-lemma self_comp_symm (e : M ≃L[R] M₂) :
+@[simp] lemma self_comp_symm (e : M ≃L[R] M₂) :
   (e : M → M₂) ∘ (e.symm : M₂ → M) = id :=
 by{ ext x, exact apply_symm_apply e x }
-
-@[simp] lemma symm_comp_self' (e : M ≃L[R] M₂) :
-  ((e.symm : M₂ →L[R] M) : M₂ → M) ∘ ((e : M →L[R] M₂) : M → M₂) = id :=
-symm_comp_self e
-
-@[simp] lemma self_comp_symm' (e : M ≃L[R] M₂) :
-  ((e : M →L[R] M₂) : M → M₂) ∘ ((e.symm : M₂ →L[R] M) : M₂ → M) = id :=
-self_comp_symm e
 
 @[simp] theorem symm_symm (e : M ≃L[R] M₂) : e.symm.symm = e :=
 by { ext x, refl }
