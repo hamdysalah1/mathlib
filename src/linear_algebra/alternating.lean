@@ -68,22 +68,14 @@ end tactic
 
 open_locale big_operators
 
-/-- Filtering to the range of a function is equivalent to taking the image by it. -/
-@[simp] lemma finset.filter_mem_range_univ {α β : Sort*}
-  [fintype α] [fintype β] [decidable_eq β]
-  (f : α → β) {_ : decidable_pred (λ (b : β), b ∈ set.range f)} :
-  finset.filter (λ (b : β), b ∈ set.range f) finset.univ = finset.image f finset.univ :=
-by { ext, simp }
-
 @[simp, to_additive]
 lemma finset.prod_filter_univ_exists_eq {α β γ : Type*}
   [fintype α] [fintype β] [comm_monoid γ]
   (f : α → β) (h : function.injective f) {_ : decidable_pred (λ (b : β), ∃ a, f a = b)} (g : β → γ) :
   ∏ x in finset.filter (λ (b : β), ∃ a, f a = b) finset.univ, g x = ∏ a, g (f a) :=
 begin
-  classical,
-  rw ←finset.prod_image (λ x _ y _ (z : f x = f y), h z),
-  refine finset.prod_congr (finset.filter_mem_range_univ f) (λ _ _, rfl),
+  haveI := classical.dec_eq β,
+  rw [finset.univ_filter_exists f, finset.prod_image (λ x _ y _ (z : f x = f y), h z)],
 end
 
 lemma finset.sum_filter_univ_mem_monoid_hom_range {α β γ : Type*}
